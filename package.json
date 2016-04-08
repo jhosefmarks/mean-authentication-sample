@@ -1,0 +1,38 @@
+{
+    "name": "mean-authentication",
+    "version": "1.0.0",
+    "description": "MEAN Authentication",
+    "repository": "https://github.com/jhosefmarks/mean-authentication-sample",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node ./bin/www"
+    },
+    "keywords": [
+        "mean",
+        "authentication"
+    ],
+    "author": "Jhosef Marks de Carvalho",
+    "license": "MIT",
+    "dependencies": {
+        "body-parser": "^1.15.0",
+        "cookie-parser": "^1.4.1",
+        "express": "^4.13.4",
+        "express-jwt": "^3.3.0",
+        "jade": "^1.11.0",
+        "jsonwebtoken": "^5.7.0",
+        "mongoose": "^4.4.11",
+        "morgan": "^1.7.0",
+        "passport": "^0.3.2",
+        "passport-local": "^1.0.0",
+        "serve-favicon": "^2.3.0"
+    },
+    "devDependencies": {
+        "gulp": "^3.9.1",
+        "gulp-concat": "^2.6.0",
+        "gulp-ng-annotate": "^2.0.0",
+        "gulp-ng-html2js": "^0.2.2",
+        "gulp-sourcemaps": "^1.6.0",
+        "gulp-uglify": "^1.5.3",
+        "gulp-watch": "^4.3.5"
+    }
+}
