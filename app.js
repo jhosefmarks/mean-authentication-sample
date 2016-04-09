@@ -1,4 +1,4 @@
-/*global require */
+/*global require, module */
 
 var express = require('express'),
     path = require('path'),
@@ -32,10 +32,14 @@ app.use(passport.initialize());
 app.use('/api', routesApi);
 
 app.use(function (req, res) {
+    'use strict';
+
     res.sendFile(path.join(__dirname, 'app_client', 'index.html'));
 });
 
 app.use(function (req, res, next) {
+    'use strict';
+
     var err = new Error('Not Found');
 
     err.status = 404;
@@ -44,6 +48,8 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (err, req, res, next) {
+    'use strict';
+
     if (err.name === 'UnauthorizedError') {
         res.status(401);
         res.json({"message" : err.name + ": " + err.message});
@@ -51,7 +57,9 @@ app.use(function (err, req, res, next) {
 });
 
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use(function (err, req, res, next) {
+        'use strict';
+
         res.status(err.status || 500);
         res.render('error', {
             message: err.message,
@@ -61,6 +69,8 @@ if (app.get('env') === 'development') {
 }
 
 app.use(function (err, req, res, next) {
+    'use strict';
+
     res.status(err.status || 500);
     res.render('error', {
         message: err.message,

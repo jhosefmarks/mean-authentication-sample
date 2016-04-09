@@ -28,7 +28,7 @@ module.exports.register = function (req, res) {
 
         res.status(200);
         res.json({
-            "token" : token
+            "token": token
         });
     });
 };
@@ -51,11 +51,20 @@ module.exports.login = function (req, res) {
 
             res.status(200);
             res.json({
-                "token" : token
+                "token": token
             });
         } else {
             // If user is not found
             res.status(401).json(info);
         }
     })(req, res);
+};
+
+module.exports.logout = function (req, res) {
+    'use strict';
+
+    req.logout();
+    res.status(200)
+        .json({"token": null})
+        .redirect('/');
 };

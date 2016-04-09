@@ -8,7 +8,7 @@ var express = require('express'),
     ctrlAuth = require('../controllers/authentication');
 
 auth = jwt({
-    secret: 'MY_SECRET',
+    secret: 'MY_SECRET_KEY',
     userProperty: 'payload'
 });
 
@@ -18,5 +18,7 @@ router.get('/profile', auth, ctrlProfile.profileRead);
 // authentication
 router.post('/register', ctrlAuth.register);
 router.post('/login', ctrlAuth.login);
+
+router.get('/logout', ctrlAuth.logout);
 
 module.exports = router;
