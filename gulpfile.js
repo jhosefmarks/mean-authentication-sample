@@ -1,30 +1,28 @@
 /*global require */
 
-var gulp = require('gulp'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    watch = require('gulp-watch'),
-    sourcemaps = require('gulp-sourcemaps'),
-    ngHtml2Js = require("gulp-ng-html2js");
+const gulp = require('gulp');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
+const watch = require('gulp-watch');
+const sourcemaps = require('gulp-sourcemaps');
+const ngHtml2Js = require("gulp-ng-html2js");
 
-gulp.task('scripts', function () {
-    'use strict';
+const scripts = () => 
+  src(['./app_client/**/*.js', '!./app_client/**/*.test.js', '!./app_client/app.min.js'])
+    .pipe(sourcemaps.init())
+    .pipe(concat('./app.min.js'))
+    .pipe(uglify({mangle: true}))
+    .pipe(dest('app_client'))
+    .pipe(sourcemaps.write('./'))
+    .pipe(dest('app_client'));
 
-    gulp.src(['./app_client/**/*.js', '!./app_client/**/*.test.js', '!./app_client/app.min.js'])
-        .pipe(sourcemaps.init())
-        .pipe(concat('./app.min.js'))
-        .pipe(uglify({mangle: true}))
-        .pipe(gulp.dest('app_client'))
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('app_client'));
-});
-
-gulp.task('watch', function () {
-    'use strict';
-
-    watch(['./app_client/**/*.js', '!./app_client/**/*.test.js', '!./app_client/app.min.js'], function () {
-        gulp.start('scripts');
-    });
-});
+const watchers = () => {
+  watch(['./app_client/**/*.js', '!./app_client/**/*.test.js', '!./app_client/app.min.js'], scripts);
+}
+watchers.displayName = 'watch';
 
 gulp.task('default', ['scripts', 'watch']);
+
+exports.scripts = scripts;
+exports.watch = watchers;
+exports.default = series(scripts, watchers);
